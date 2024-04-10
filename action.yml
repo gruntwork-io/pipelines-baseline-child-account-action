@@ -94,6 +94,7 @@ runs:
         infra_live_directory: '.'
         infra_live_repo_branch: ${{ steps.gruntwork_context.outputs.branch }}
         gruntwork_config: "${{ steps.gruntwork_context.outputs.gruntwork_config }}"
+        gruntwork_config_file: "${{ steps.gruntwork_context.outputs.gruntwork_config_file }}"
         deploy_branch_name: ${{ steps.gruntwork_context.outputs.deploy_branch_name }}
 
     # Apply Access Control Roles and Baseline in Delegated Account
@@ -108,4 +109,5 @@ runs:
         infra_live_directory: '.'
         infra_live_repo_branch: ${{ steps.gruntwork_context.outputs.branch }}
         gruntwork_config: "${{ steps.gruntwork_context.outputs.gruntwork_config }}"
+        gruntwork_config_file: "${{ steps.gruntwork_context.outputs.gruntwork_config_file }}"
         deploy_branch_name: ${{ steps.gruntwork_context.outputs.deploy_branch_name }}
