@@ -42,7 +42,7 @@ runs:
       uses: aws-actions/configure-aws-credentials@v4
       with:
         aws-region:  ${{ steps.gruntwork_context.outputs.default_aws_region }}
-        role-to-assume: "arn:aws:iam::${{ steps.gruntwork_config.outputs.account_id }}:role/${{ steps.gruntwork_context.outputs.role_name }}"
+        role-to-assume: "arn:aws:iam::${{ steps.gruntwork_context.outputs.account_id }}:role/${{ steps.gruntwork_context.outputs.role_name }}"
         role-duration-seconds: 3600
         role-session-name: ${{ steps.gruntwork_context.outputs.role_session_name }}
 
