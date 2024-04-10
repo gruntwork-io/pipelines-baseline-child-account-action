@@ -23,7 +23,7 @@ runs:
         fetch-depth: 0
 
     - name: Bootstrap Workflow
-      id: bootstrap
+      id: gruntwork_context
       uses: gruntwork-io-team/pipelines-bootstrap@main
       with:
         token: ${{ inputs.gruntwork_code_access_token }}
