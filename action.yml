@@ -40,8 +40,8 @@ runs:
         terragrunt_command: ${{ fromJson(inputs.job).Action.Command }} ${{ fromJson(inputs.job).Action.Args }}
         additional_data: ${{ toJson(fromJson(inputs.job).AdditionalData) }}
         account_names: ${{ fromJson(inputs.job).AdditionalData.AccountNames }}
-        child_account_id: ${{ input.account_id }}
-        new_account_name: ${{ input.account_name }}
+        child_account_id: ${{ inputs.account_id }}
+        new_account_name: ${{ inputs.account_name }}
 
     # Auth to child account
     # THIS RETRIEVES PERMISSIONS TO BE ABLE TO RUN A PLAN/APPLY IN THE NEWLY CREATED CHILD ACCOUNT
@@ -51,7 +51,7 @@ runs:
       shell: bash
       env:
         SESSION_NAME: ${{ steps.gruntwork_context.outputs.role_session_name }}
-        CHILD_ACCOUNT_ID: ${{ input.account_id }}
+        CHILD_ACCOUNT_ID: ${{ inputs.account_id }}
       run: |
         RESPONSE="$(aws sts assume-role --role-arn "arn:aws:iam::$CHILD_ACCOUNT_ID:role/AWSControlTowerExecution" --role-session-name "$SESSION_NAME")"
         ASSUMED_ROLE_CREDS="$(echo "$RESPONSE" | jq -r '.Credentials')"
@@ -84,7 +84,7 @@ runs:
       with:
         token: ${{ inputs.gruntwork_code_access_token }}
         pipelines_cli_version: ${{ steps.gruntwork_context.outputs.pipelines_cli_version }}
-        working_directory: "${{ input.account_name }}/_global/account-baseline"
+        working_directory: "${{ inputs.account_name }}/_global/account-baseline"
         terragrunt_command: "init"
         infra_live_repo: '.'
         infra_live_directory: '.'
@@ -98,7 +98,7 @@ runs:
       with:
         token: ${{ inputs.gruntwork_code_access_token }}
         pipelines_cli_version: ${{ steps.gruntwork_context.outputs.pipelines_cli_version }}
-        working_directory: "${{ input.account_name }}/_global/account-baseline"
+        working_directory: "${{ inputs.account_name }}/_global/account-baseline"
         terragrunt_command: ${{ steps.gruntwork_context.outputs.terragrunt_command }}
         infra_live_repo: '.'
         infra_live_directory: '.'
