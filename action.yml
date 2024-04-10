@@ -84,7 +84,7 @@ runs:
     # a single module first to create the buckets so that subsequent run-all commands do not fail.
     - name: "[Baseline]: Bootstrap child account with state & logs S3 buckets"
       if: ${{ contains(steps.gruntwork_context.outputs.terragrunt_command, 'plan') }}
-      uses: gruntwork-io/pipelines-execute@v3.0.0-beta4
+      uses: gruntwork-io/pipelines-execute@v3.0.0-beta5
       with:
         token: ${{ inputs.gruntwork_code_access_token }}
         pipelines_cli_version: ${{ steps.gruntwork_context.outputs.pipelines_cli_version }}
@@ -96,11 +96,11 @@ runs:
         gruntwork_config: "${{ steps.gruntwork_context.outputs.gruntwork_config }}"
         gruntwork_config_file: "${{ steps.gruntwork_context.outputs.gruntwork_config_file }}"
         deploy_branch_name: ${{ steps.gruntwork_context.outputs.deploy_branch_name }}
-        tf_binary: ${{ (steps.gruntwork_context.outputs.tf_binary }}
+        tf_binary: ${{ steps.gruntwork_context.outputs.tf_binary }}
 
     # Apply Access Control Roles and Baseline in Delegated Account
     - name: "[Baseline]: Bootstrap child account with access control roles, state & logs S3 buckets"
-      uses: gruntwork-io/pipelines-execute@v3.0.0-beta4
+      uses: gruntwork-io/pipelines-execute@v3.0.0-beta5
       with:
         token: ${{ inputs.gruntwork_code_access_token }}
         pipelines_cli_version: ${{ steps.gruntwork_context.outputs.pipelines_cli_version }}
@@ -112,4 +112,4 @@ runs:
         gruntwork_config: "${{ steps.gruntwork_context.outputs.gruntwork_config }}"
         gruntwork_config_file: "${{ steps.gruntwork_context.outputs.gruntwork_config_file }}"
         deploy_branch_name: ${{ steps.gruntwork_context.outputs.deploy_branch_name }}
-        tf_binary: ${{ (steps.gruntwork_context.outputs.tf_binary }}
+        tf_binary: ${{ steps.gruntwork_context.outputs.tf_binary }}
