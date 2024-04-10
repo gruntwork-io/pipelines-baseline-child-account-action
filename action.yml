@@ -47,6 +47,7 @@ runs:
         SESSION_NAME: ${{ steps.gruntwork_context.outputs.role_session_name }}
         CHILD_ACCOUNT_ID: ${{ inputs.account_id }}
       run: |
+        echo "Assuming AWSControlTowerExecution Role"
         RESPONSE="$(aws sts assume-role --role-arn "arn:aws:iam::$CHILD_ACCOUNT_ID:role/AWSControlTowerExecution" --role-session-name "$SESSION_NAME")"
         ASSUMED_ROLE_CREDS="$(echo "$RESPONSE" | jq -r '.Credentials')"
         AWS_ACCESS_KEY_ID="$(echo "$ASSUMED_ROLE_CREDS" | jq -r '.AccessKeyId')"
