@@ -96,6 +96,7 @@ runs:
         gruntwork_config: "${{ steps.gruntwork_context.outputs.gruntwork_config }}"
         gruntwork_config_file: "${{ steps.gruntwork_context.outputs.gruntwork_config_file }}"
         deploy_branch_name: ${{ steps.gruntwork_context.outputs.deploy_branch_name }}
+        tf_binary: ${{ (steps.gruntwork_context.outputs.tf_binary }}
 
     # Apply Access Control Roles and Baseline in Delegated Account
     - name: "[Baseline]: Bootstrap child account with access control roles, state & logs S3 buckets"
@@ -111,3 +112,4 @@ runs:
         gruntwork_config: "${{ steps.gruntwork_context.outputs.gruntwork_config }}"
         gruntwork_config_file: "${{ steps.gruntwork_context.outputs.gruntwork_config_file }}"
         deploy_branch_name: ${{ steps.gruntwork_context.outputs.deploy_branch_name }}
+        tf_binary: ${{ (steps.gruntwork_context.outputs.tf_binary }}
