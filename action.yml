@@ -37,6 +37,15 @@ runs:
         child_account_id: ${{ inputs.account_id }}
         new_account_name: ${{ inputs.account_name }}
 
+    # Finally, auth to the mgmt account so we can assume a role in the child account
+    - name: "[Baseline]: Authenticate to AWS"
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-region:  ${{ steps.gruntwork_context.outputs.default_aws_region }}
+        role-to-assume: "arn:aws:iam::${{ inputs.account_id }}:role/${{ steps.gruntwork_context.outputs.role_name }}"
+        role-duration-seconds: 3600
+        role-session-name: ${{ steps.gruntwork_context.outputs.role_session_name }}
+
     # Auth to child account
     # THIS RETRIEVES PERMISSIONS TO BE ABLE TO RUN A PLAN/APPLY IN THE NEWLY CREATED CHILD ACCOUNT
     # The "AWSControlTowerExecution" role being assumed here is created by Control Tower in each account it provisions
