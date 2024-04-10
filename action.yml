@@ -32,14 +32,14 @@ runs:
       id: bootstrap
       uses: gruntwork-io-team/pipelines-bootstrap@main
       with:
-        token: ${{ secrets.GRUNTWORK_CODE_ACCESS_TOKEN }}
-        change_type: ${{ fromJson(input.job).ChangeType }}
-        branch: ${{ fromJson(input.job).Ref }}
-        working_directory: ${{ fromJson(input.job).WorkingDirectory }}
-        account_id: ${{ fromJson(input.job).AccountId }}
-        terragrunt_command: ${{ fromJson(input.job).Action.Command }} ${{ fromJson(input.job).Action.Args }}
-        additional_data: ${{ toJson(fromJson(input.job).AdditionalData) }}
-        account_names: ${{ fromJson(input.job).AdditionalData.AccountNames }}
+        token: ${{ inputs.gruntwork_code_access_token }}
+        change_type: ${{ fromJson(inputs.job).ChangeType }}
+        branch: ${{ fromJson(inputs.job).Ref }}
+        working_directory: ${{ fromJson(inputs.job).WorkingDirectory }}
+        account_id: ${{ fromJson(inputs.job).AccountId }}
+        terragrunt_command: ${{ fromJson(inputs.job).Action.Command }} ${{ fromJson(inputs.job).Action.Args }}
+        additional_data: ${{ toJson(fromJson(inputs.job).AdditionalData) }}
+        account_names: ${{ fromJson(inputs.job).AdditionalData.AccountNames }}
         child_account_id: ${{ input.account_id }}
         new_account_name: ${{ input.account_name }}
 
