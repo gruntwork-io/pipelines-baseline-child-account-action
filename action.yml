@@ -22,12 +22,6 @@ runs:
       with:
         fetch-depth: 0
 
-    - name: Update comment
-      uses: gruntwork-io/pipelines-status-update@v0.1.0
-      with:
-        step_name: Baseline Account ${{ matrix.jobs.Name }}
-        step_status: "in_progress"
-
     - name: Bootstrap Workflow
       id: bootstrap
       uses: gruntwork-io-team/pipelines-bootstrap@main
