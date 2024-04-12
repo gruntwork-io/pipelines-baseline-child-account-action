@@ -104,7 +104,7 @@ runs:
       with:
         token: ${{ inputs.gruntwork_code_access_token }}
         pipelines_cli_version: ${{ steps.gruntwork_context.outputs.pipelines_cli_version }}
-        working_directory: "${{ inputs.account_name }}/_global/account-baseline"
+        working_directory: "${{ inputs.account_name }}"
         terragrunt_command: ${{ steps.gruntwork_context.outputs.terragrunt_command }}
         infra_live_repo: '.'
         infra_live_directory: '.'
