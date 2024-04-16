@@ -1,7 +1,7 @@
 name: Bootstrap Workflow
 description: "Bootstrap workflows with common requirements"
 inputs:
-  gruntwork_code_access_token:
+  PIPELINES_READ_TOKEN:
     description: "The GitHub token to use for checking out the infrastructure-live repo"
     required: true
   account_id:
@@ -26,7 +26,7 @@ runs:
       id: gruntwork_context
       uses: gruntwork-io-team/pipelines-bootstrap@main
       with:
-        token: ${{ inputs.gruntwork_code_access_token }}
+        token: ${{ inputs.PIPELINES_READ_TOKEN }}
         change_type: ${{ fromJson(inputs.job).ChangeType }}
         branch: ${{ fromJson(inputs.job).Ref }}
         working_directory: ${{ fromJson(inputs.job).WorkingDirectory }}
@@ -86,7 +86,7 @@ runs:
       if: ${{ contains(steps.gruntwork_context.outputs.terragrunt_command, 'plan') }}
       uses: gruntwork-io/pipelines-execute@v3.0.0-beta5
       with:
-        token: ${{ inputs.gruntwork_code_access_token }}
+        token: ${{ inputs.PIPELINES_READ_TOKEN }}
         pipelines_cli_version: ${{ steps.gruntwork_context.outputs.pipelines_cli_version }}
         working_directory: "${{ inputs.account_name }}/_global/account-baseline"
         terragrunt_command: "init"
@@ -102,7 +102,7 @@ runs:
     - name: "[Baseline]: Bootstrap child account with access control roles, state & logs S3 buckets"
       uses: gruntwork-io/pipelines-execute@v3.0.0-beta5
       with:
-        token: ${{ inputs.gruntwork_code_access_token }}
+        token: ${{ inputs.PIPELINES_READ_TOKEN }}
         pipelines_cli_version: ${{ steps.gruntwork_context.outputs.pipelines_cli_version }}
         working_directory: "${{ inputs.account_name }}"
         terragrunt_command: ${{ steps.gruntwork_context.outputs.terragrunt_command }}
