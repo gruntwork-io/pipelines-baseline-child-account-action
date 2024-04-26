@@ -24,7 +24,7 @@ runs:
 
     - name: Bootstrap Workflow
       id: gruntwork_context
-      uses: gruntwork-io/pipelines-bootstrap@main
+      uses: gruntwork-io/pipelines-bootstrap@v0.0.1
       with:
         token: ${{ inputs.PIPELINES_READ_TOKEN }}
         change_type: ${{ fromJson(inputs.job).ChangeType }}
