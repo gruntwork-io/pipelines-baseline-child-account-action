@@ -87,7 +87,6 @@ runs:
       uses: gruntwork-io/pipelines-execute@v3.1.6
       with:
         token: ${{ inputs.PIPELINES_READ_TOKEN }}
-        pipelines_cli_version: ${{ steps.gruntwork_context.outputs.pipelines_cli_version }}
         working_directory: "${{ inputs.account_name }}/_global/account-baseline"
         terragrunt_command: "init"
         infra_live_repo: '.'
@@ -103,7 +102,6 @@ runs:
       uses: gruntwork-io/pipelines-execute@v3.1.6
       with:
         token: ${{ inputs.PIPELINES_READ_TOKEN }}
-        pipelines_cli_version: ${{ steps.gruntwork_context.outputs.pipelines_cli_version }}
         working_directory: "${{ inputs.account_name }}"
         terragrunt_command: ${{ steps.gruntwork_context.outputs.terragrunt_command }}
         infra_live_repo: '.'
